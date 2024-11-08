@@ -1,13 +1,15 @@
-const express = require('express');
+const express = require("express");
+const { setPosts }  = require (" ../controllers/post.controllers");
 const router = express.Router();
+
+
+
 // Exemple de route
 router.get("/", (req, res) => {
     res.json({ message: "Voici les données"});
 });
 
-router.post("/", (req, res) => {
-    res.json({ message: req.body.message});
-});
+router.post("/", setPosts);
 
 router.put('/:id', (req, res) => {
     res.json({ messageId: req.params.id});

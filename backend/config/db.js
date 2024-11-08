@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
+    mongoose.set('strictQuery', false); // Option pour les requêtes strictes
+
     try {
-        mongoose.set('strictQuery', false);
-        mongoose.connect(process.env.MONGO_URI, () =>
-             console.log ("Mongo connecté"))
+        // Connexion sans options obsolètes
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("MongoDB connecté");
     } catch (err) {
-        console.log(err);
-        process.exit();
+        console.error("Erreur de connexion à MongoDB:", err);
+        process.exit(1); // Arrête le processus en cas d'erreur
     }
-}
-module.exports = connectDB
+};
+
+module.exports = connectDB;
